@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.title {
+  text-align: center;
+}
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 1%;
+  font-size: 1.2em;
+  white-space: pre-wrap;
+}
+.function {
+  font-family: "Courier New", Courier, monospace;
+  padding-left: 1%;
+}
+.desc {
+  padding-left: 1%;
+  font-size: 1.1em;
+}
+.inline {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #eee;
+}
+</style>
+</head>
+<body>
+<h1 class="title">
+MusicalMusic v0.1
+</h1>
+<h2 class="function">__init__(username, password)</h2>
+<p class="desc">Creates your instance using your Musescore account.</p>
+<h2 class="function">search(query)</h2>
+<p class="desc">Searches MuseScore for a query.<br>Returns <span class="inline">list</span></p>
+<pre><code>import MusicalMusic
+
+MyInstance = MusicalMusic.MusicalMusic("xX_Username_Xx","Password123")
+result = MyInstance.search("radioactive")
+print(result)</pre></code>
+<p class="desc">
+Output:
+</p>
+<pre><code>[{'3924896': ['Radioactive- Imagine Dragons', 'Piano', '03:29']}, {'3783076': ['Imagine dragons Radioactive', 'Piano', '03:24']}, {'3260776': ['Radioactive', 'Violin(2)', '03:28']}, {'4636696': ['Imagine dragons - Radioactive (lead sheet)', 'Piano', '02:16']}, {'4874647': ['Radioactive by Imagine Dragons ~ Arrangement for Vocals and Piano', 'Voice, Piano', '03:32']}, {'1597251': ['Radioactive Saxophone Duet', 'Tenor Saxophone, Baritone Saxophone', '00:50']}, {'3404976': ['Radioactive', 'Violin, Cello', '03:30']}, {'4038706': ['Radioactive - Imagine Dragons (AJ)', 'Piano', '03:12']}, {'2882516': ['Radioactive Imagine Dragons Marching Band Stand Tune (11/30 Edit)', 'Flute, Clarinet, Alto Saxophone, Trumpet, French Horn, Tenor Saxophone, Tuba(2), Trombone, Percussion(4)', '01:22']}, {'1715766': ['Linsey Stirling Radioactive', 'Violin', '03:12']}]</code></pre>
+<h2 class="function">download(id, filename, extension="mp3")</h2> 
+<p class="desc">Downloads Musescore file using its ID.<br><b>id</b>: The ID of the MuseScore song.<br><b>filename</b>: The filename to save the file as (include extension).<br><b>extension</b>: The file format to download. Supports mp3, pdf, mid, xml, and mscz.</p> 
+<pre><code>import MusicalMusic
+
+MyInstance = MusicalMusic.MusicalMusic("xX_Username_Xx","Password123")
+query = input("What's your favourite song? ")
+results = MyInstance.search(query)
+song = results[0]
+id = list(song.keys())[0]
+songInfo = list(song.values())[0]
+
+title = songInfo[0]
+instruments = songInfo[1]
+duration = songInfo[2]
+
+MyInstance.download(id, "song.mp3")
+
+print(f'''Title: {title}
+Duration: {duration}
+Instruments: {instruments}
+''')</code></pre>
+<p class="desc">Output:</p>
+<pre><code>What's your favourite song? radioactive
+Title: Radioactive- Imagine Dragons
+Duration: 03:29
+Instruments: Piano</code></pre>
+</body>
+</html>
