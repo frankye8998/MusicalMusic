@@ -22,11 +22,12 @@ class MusicalMusic:
     except KeyError:
       raise InvalidCredentials("Please check your username and password!")
     mu_browser_uni = r.cookies['mu_browser_uni']
-
+    self.mu_browser_uni = mu_browser_uni
+    self.mu_user = mu_user
     self.musescoreToken = ('cookie', f"mu_browser_uni={mu_browser_uni}; mu_user={mu_user}")
   def search(self, song):
     query = {"text": song}
-    search = requests.get("https://musescore.com/sheetmusic?" + urllib.parse.urlencode(query)).text
+    search = requests.get(f"https://musescore.com/sheetmusic?{urllib.parse.urlencode(query)}").text
     soup = bs4.BeautifulSoup(search, "html.parser")
     listoftitles = []
     for i in soup.findAll("div", {"class":"col-right"}):
@@ -45,3 +46,13 @@ class MusicalMusic:
       urllib.request.urlretrieve(newlink, filename)
     except urllib.error.HTTPError:
       raise InvalidScoreID("The ID of the score is invalid!")
+
+  def retrieve(self, id, extension = "mp3"):
+    if extension not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
+      raise InvalidFileExtension("Must be mp3, pdf, mid, xml, or mscz.")
+    newlink = f"https://musescore.com/score/{id}/download/{extension}"
+    cookies = {"mu_browser_uni": self.mu_browser_uni, "mu_user": self.mu_user}
+    bytes = requests.get(newlink, cookies=cookies)
+    if bytes.status_code != 200:
+      raise InvalidScoreID(str(bytes.status_code))
+    return bytes.content
