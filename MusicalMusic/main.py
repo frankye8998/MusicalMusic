@@ -25,16 +25,6 @@ class MusicalMusic:
     self.mu_browser_uni = mu_browser_uni
     self.mu_user = mu_user
     self.musescoreToken = ('cookie', f"mu_browser_uni={mu_browser_uni}; mu_user={mu_user}")
-  def search(self, song):
-    query = {"text": song}
-    search = requests.get(f"https://musescore.com/sheetmusic?{urllib.parse.urlencode(query)}").text
-    soup = bs4.BeautifulSoup(search, "html.parser")
-    listoftitles = []
-    for i in soup.findAll("div", {"class":"col-right"}):
-      listoftitles.append({"id": i.find("a")["href"].split("/")[-1], "title": i.find("a").text.strip(), "instruments": i.find("div", {"class": "instruments"}).text, "duration": i.findAll("span")[2].text})
-    return listoftitles
-
-
   def download(self, id, filename, extension = "mp3"):
     if extension not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
       raise InvalidFileExtension("Must be mp3, pdf, mid, xml, or mscz.")
