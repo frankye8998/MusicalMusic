@@ -2,8 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
   name="MusicalMusic",
-  version="0.0.2",
+  version="0.1.0",
   description="Retrieve Sheet music from Musescore!",
+  long_description=open("README.md").read(),
+  long_description_content_type='text/markdown',
   url="https://github.com/frankye8998/MusicalMusic/",
   author="Frank Ye",
   author_email="frankfrankfrankyeyeye@gmail.com",

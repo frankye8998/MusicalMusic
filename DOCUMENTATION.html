@@ -29,15 +29,14 @@ pre code {
 </head>
 <body>
 <h1 class="title">
-MusicalMusic v0.0.3
+MusicalMusic v0.1.0
 </h1>
 <h2 class="function">__init__(username, password)</h2>
 <p class="desc">Creates your instance using your Musescore account.</p>
-<h2 class="function">search(query)</h2>
+<h2 class="function">MusicalMusic.search(query)</h2>
 <p class="desc">Searches MuseScore for a query.<br>Returns <span class="inline">list</span></p>
 <pre><code>import MusicalMusic
 
-MyInstance = MusicalMusic.MusicalMusic("xX_Username_Xx","Password123")
 result = MyInstance.search("radioactive")
 print(result)</pre></code>
 <p class="desc">
@@ -50,7 +49,7 @@ Output:
 
 MyInstance = MusicalMusic.MusicalMusic("xX_Username_Xx","Password123")
 query = input("What's your favourite song? ")
-results = MyInstance.search(query)
+results = MusicalMusic.search(query)
 song = results[0]
 
 id = song["id"]
@@ -69,5 +68,7 @@ Instruments: {instruments}
 Title: Radioactive- Imagine Dragons
 Duration: 03:29
 Instruments: Piano</code></pre>
+<h2 class="function">retrieve(id, extension="mp3")</h2>
+<p class="desc">Returns Musescore file using its ID<br><b>id</b>: The ID of the MuseScore song.<br><b>extension</b>: The file format to retrieve. Supports mp3, pdf, mid, xml, and mscz.<br>Returns <span class="inline">bytes</span></p>
 </body>
 </html>
