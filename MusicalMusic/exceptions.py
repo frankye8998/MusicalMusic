@@ -1,5 +1,3 @@
-
-
 class MuseScoreException(Exception):
   pass
 
