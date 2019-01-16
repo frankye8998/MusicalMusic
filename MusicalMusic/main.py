@@ -73,5 +73,3 @@ class MusicalMusic:
     if bytes.status_code != 200:
       raise InvalidScoreID(str(bytes.status_code))
     return bytes.content
-
-#79AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
