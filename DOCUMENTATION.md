@@ -7,7 +7,7 @@ Creates your instance using your Musescore account.
 ## MusicalMusic.search(query)
 
 Searches MuseScore for a query.  
-Returns <span class="inline">list</span>
+Returns `list<`
 
     import MusicalMusic
 
@@ -56,4 +56,4 @@ Output:
 Returns Musescore file using its ID  
 **id**: The ID of the MuseScore song.  
 **extension**: The file format to retrieve. Supports mp3, pdf, mid, xml, and mscz.  
-Returns <span class="inline">bytes</span>
+Returns `bytes`
