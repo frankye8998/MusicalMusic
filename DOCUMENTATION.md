@@ -7,6 +7,7 @@ Creates your instance using your Musescore account.
 ## MusicalMusic.search(query)
 
 Searches MuseScore for a query.  
+**query**: The search query.
 Returns `list`
 
     import MusicalMusic
@@ -53,7 +54,7 @@ Output:
 
 ## retrieve(id, extension="mp3")
 
-Returns Musescore file using its ID  
+Returns Musescore file using its ID.
 **id**: The ID of the MuseScore song.  
 **extension**: The file format to retrieve. Supports mp3, pdf, mid, xml, and mscz.  
 Returns `bytes`
