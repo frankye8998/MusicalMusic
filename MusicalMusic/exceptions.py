@@ -1,13 +1,8 @@
-
-
-class MuseScoreException(Exception):
+class InvalidFileExtension(Exception):
   pass
 
-class InvalidFileExtension(MuseScoreException):
+class InvalidScoreID(Exception):
   pass
 
-class InvalidScoreID(MuseScoreException):
-  pass
-
-class InvalidCredentials(MuseScoreException):
+class InvalidCredentials(Exception):
   pass
