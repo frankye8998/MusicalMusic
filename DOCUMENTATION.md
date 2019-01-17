@@ -7,7 +7,7 @@ Creates your instance using your Musescore account.
 ## MusicalMusic.search(query)
 
 Searches MuseScore for a query.  
-Returns `list<`
+Returns `list`
 
     import MusicalMusic
 
