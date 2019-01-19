@@ -54,12 +54,12 @@ class MusicalMusic:
         urllib.request.install_opener(opener)
         try:
             urllib.request.urlretrieve(newlink, filename)
-        except urllib.error.HTTPError:
-            raise InvalidScoreID("The ID of the score is invalid!")
+        except urllib.error.HTTPError as e:
+            raise InvalidScoreID("The ID of the score is invalid!") from e
 
     def retrieve(self, id, extension="mp3"):
         if extension not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
-            raise InvalidFileExtension("Must be mp3, pdf, mid, xml, or mscz.")
+            raise InvalidFileExtension("Must be mp3, pdf, mid, mxl, or mscz.")
         newlink = f"https://musescore.com/score/{id}/download/{extension}"
         cookies = {"mu_browser_uni": self.mu_browser_uni,
                    "mu_user": self.mu_user}
