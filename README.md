@@ -1,5 +1,5 @@
 # MusicalMusic
-[![Downloads](https://pepy.tech/badge/musicalmusic)](https://pepy.tech/project/musicalmusic)
+[![Downloads](https://pepy.tech/badge/musicalmusic)](https://pepy.tech/project/musicalmusic)[![Build Status](https://travis-ci.org/frankye8998/MusicalMusic.svg?branch=master)](https://travis-ci.org/frankye8998/MusicalMusic)
 
 MusicalMusic is a Musescore wrapper for Python 3.
 ## Installing
