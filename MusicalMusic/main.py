@@ -32,35 +32,21 @@ class MusicalMusic:
                                     cookies=cookies,
                                     allow_redirects=False
                                     ).cookies["mu_user"]
-        except KeyError:
+        except KeyError as e:
             raise InvalidCredentials(
-                "Please check your username and password!")
+                "Please check your username and password!") from e
 
         mu_browser_uni = r.cookies['mu_browser_uni']
 
         self.mu_browser_uni = mu_browser_uni
         self.mu_user = mu_user
-        self.musescoreToken = ('cookie',
-                               f"mu_browser_uni={mu_browser_uni};"
-                               "mu_user={mu_user}")
 
-    def download(self, id, filename, extension="mp3"):
-        """Downloads Musescore file."""
-        if extension not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
-            raise InvalidFileExtension("Must be mp3, pdf, mid, xml, or mscz.")
-        newlink = f"https://musescore.com/score/{id}/download/{extension}"
-        opener = urllib.request.build_opener()
-        opener.addheaders = [self.musescoreToken]
-        urllib.request.install_opener(opener)
-        try:
-            urllib.request.urlretrieve(newlink, filename)
-        except urllib.error.HTTPError as e:
-            raise InvalidScoreID("The ID of the score is invalid!") from e
+    def retrieve(self, id, format="pdf"):
+        """Retrieves Musescore data in bytes"""
 
-    def retrieve(self, id, extension="mp3"):
-        if extension not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
+        if format not in ["mp3", "pdf", "mid", "mxl", "mscz"]:
             raise InvalidFileExtension("Must be mp3, pdf, mid, mxl, or mscz.")
-        newlink = f"https://musescore.com/score/{id}/download/{extension}"
+        newlink = f"https://musescore.com/score/{id}/download/{format}"
         cookies = {"mu_browser_uni": self.mu_browser_uni,
                    "mu_user": self.mu_user}
         bytes = requests.get(newlink, cookies=cookies)
