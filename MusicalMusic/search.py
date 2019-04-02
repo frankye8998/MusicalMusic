@@ -1,6 +1,7 @@
 import requests
 import bs4
 import urllib
+from .exceptions import *
 
 
 def search(song, sort="relevance"):
