@@ -3,10 +3,11 @@ import bs4
 import urllib
 
 
-def search(song):
+def search(song, sort="relevance"):
     """Static search function"""
-
-    query = {"text": song}
+    if sort not in ["relevance", "date_uploaded", "comment_count", "view_count"]:
+        raise InvalidSearchSort("Results must be sorted by either \"relevance\", \"date_uploaded\", \"comment_count\", or \"view_count\"")
+    query = {"text": song, "sort": sort}
     search = requests.get(f"https://musescore.com/sheetmusic?"
                           f"{urllib.parse.urlencode(query)}").text
     soup = bs4.BeautifulSoup(search, "html.parser")
