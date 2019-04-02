@@ -12,7 +12,7 @@ class MusicalMusic:
     def __init__(self, username, password):
 
         url = "https://musescore.com/user/login"
-        r = requests.get(url, verify=False)
+        r = requests.get(url)
         soup = bs4.BeautifulSoup(r.text, "html.parser")
         csrf = soup.find("meta", {"name": "csrf-token"})["content"]
         url = "https://musescore.com/user/auth/login/process"
@@ -31,7 +31,6 @@ class MusicalMusic:
                                     data=data,
                                     cookies=cookies,
                                     allow_redirects=False,
-                                    verify=False,
                                     ).cookies["mu_user_new"]
         except KeyError as e:
             raise InvalidCredentials(
@@ -60,8 +59,9 @@ class MusicalMusic:
             raise InvalidFileExtension("Must be mp3, pdf, mid, mxl, or mscz.")
         newlink = f"https://musescore.com/score/{id}/download/{format}"
         opener = urllib.request.build_opener()
-        opener.addheaders = [("cookie", f"mu_browser_uni={self.mu_browser_uni};"\
-                             "mu_user_new={self.mu_user}")]
+        cookieString = f"mu_browser_uni={self.mu_browser_uni};" \
+                        f"mu_user_new={self.mu_user}"
+        opener.addheaders = [("cookie", cookieString)]
         urllib.request.install_opener(opener)
         try:
             urllib.request.urlretrieve(newlink, filename)
