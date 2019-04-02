@@ -60,8 +60,8 @@ class MusicalMusic:
             raise InvalidFileExtension("Must be mp3, pdf, mid, mxl, or mscz.")
         newlink = f"https://musescore.com/score/{id}/download/{format}"
         opener = urllib.request.build_opener()
-        opener.addheaders = [("cookie", f"mu_browser_uni={self.mu_browser_uni};
-                             mu_user_new={self.mu_user}")]
+        opener.addheaders = [("cookie", f"mu_browser_uni={self.mu_browser_uni};"\
+                             "mu_user_new={self.mu_user}")]
         urllib.request.install_opener(opener)
         try:
             urllib.request.urlretrieve(newlink, filename)
